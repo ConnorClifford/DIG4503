@@ -1,3 +1,4 @@
+//------declare imported vars--------
 const Express = require ("express");
 const App = Express();
 const port = 80;
@@ -10,7 +11,7 @@ const pokeArray = pokemons;
 const name = getPokemons.getPokemonByName();
 const id = getPokemons.getPokemonById();
 
-
+//-------------------------------------
 App.get("/name/:name", (req,res)=>{
      
     let result = {"error": "Nothing found that matches that. :C"};
