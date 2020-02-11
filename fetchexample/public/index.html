@@ -1,0 +1,29 @@
+<html>
+    <body>
+        <h1>Can U Guess the Secret #???</h1>
+        <h3>Hint: 1-9</h3>
+        <script>
+            function clicker(event){
+
+                event.preventDefault();
+
+                let element = document.querySelector("input");
+                //console.log(element.value);
+
+                fetch("/api/" + element.value).then((Response) =>{
+                    return Response.json();
+                }).then((ProcessedResponse) =>{
+                    console.log(ProcessedResponse);
+                });
+
+                console.log("clicked!");
+            }
+            </script>
+
+            <form onsubmit="clicker(event)">
+                <input id = "input" type="text">
+                <button>click Me!</button>
+            </form>
+
+    </body>
+</html>
