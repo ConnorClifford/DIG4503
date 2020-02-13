@@ -1,29 +1,98 @@
 <html>
     <body>
-        <h1>Can U Guess the Secret #???</h1>
+        <h1>Movie Search</h1>
         <h3>Hint: 1-9</h3>
         <script>
-            function clicker(event){
+
+            function readName(event){
 
                 event.preventDefault();
 
-                let element = document.querySelector("input");
+                let element = document.querySelector("#name");
                 //console.log(element.value);
 
-                fetch("/api/" + element.value).then((Response) =>{
+                fetch("/api/movies/name/" + element.value).then((Response) => {
                     return Response.json();
-                }).then((ProcessedResponse) =>{
+                }).then((ProcessedResponse) => {
                     console.log(ProcessedResponse);
+                    let reporting = document.querySelector("#reportingArea");
+
+                    if(processed.error){
+                        reporting.innerHTML = processed.name;
+                    } else{
+                        reporting.innerHTML = "Secret!";
+                    }
+                });
+                //console.log("clicked!");
+            }
+
+
+            function readScore(event){
+
+                event.preventDefault();
+
+                let element = document.querySelector("#score");
+                //console.log(element.value);
+
+                fetch("/api/movies/score/" + element.value).then((Response) => {
+                    return Response.json();
+                }).then((ProcessedResponse) => {
+                    //console.log(ProcessedResponse);
+                    let reporting = document.querySelector("#reportingArea");
+
+                    if(processed.error){
+                        reporting.innerHTML = processed.error;
+                    } else{
+                        reporting.innerHTML = processed.score;
+                    }
+                });
+                console.log("clicked!");
+                }
+
+
+
+            function createMovie(event){
+
+                event.preventDefault();
+
+                let name = document.querySelector("#movieName");
+                let score = document.querySelector("#movieScore");
+
+                fetch("/api/movies/" + name.value + "/" + score.value, {
+                    "method": "post"
+                }).then((res) => {
+                    return res.json();
+                }).then((processed) => {
+                    console.log(processed);
                 });
 
-                console.log("clicked!");
             }
-            </script>
 
-            <form onsubmit="clicker(event)">
-                <input id = "input" type="text">
-                <button>click Me!</button>
-            </form>
+
+            </script>
+            <h2> Name </h2>
+                <form onsubmit="readName(event)">
+                    <input id = "name" type="text">
+                    <button>click Me!</button>
+                </form>
+
+            <h2>Score</h2>
+                <form onsubmit="readScore(event)">
+                    <input id = "score" type="text">
+                    <button>click Me!</button>
+                </form>
+
+                <h2> create movie </h2>
+                <form onsubmit="createMovie(event)">
+                    <h3>name</h3>
+                    <input id = "movieName" type="text">
+                    <h3>score</h3>
+                    <input id = "movieScore" type="text">
+
+                    <button>create</button>
+                </form>
+
+            <span id = "reportingArea"></span>
 
     </body>
 </html>
