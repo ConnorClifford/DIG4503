@@ -1,9 +1,8 @@
 <html>
     <body>
-        <h1>Movie Search</h1>
-        <h3>Hint: 1-9</h3>
+        <h1>Pokedex Search</h1>
+        <h3>Search by name or Pokedex #</h3>
         <script>
-
             function readName(event){
 
                 event.preventDefault();
@@ -11,7 +10,7 @@
                 let element = document.querySelector("#name");
                 //console.log(element.value);
 
-                fetch("/api/movies/name/" + element.value).then((Response) => {
+                fetch("/name/" + element.value).then((Response) => {
                     return Response.json();
                 }).then((ProcessedResponse) => {
                     console.log(ProcessedResponse);
@@ -20,33 +19,33 @@
                     if(ProcessedResponse.error){
                         reporting.innerHTML = "Sorry, that doesn't exist. We returned: " + ProcessedResponse.name + ".";
                     } else{
-                        reporting.innerHTML = "The movie with that name has a Rotten Tomatoes score of: " + ProcessedResponse.score;
+                        reporting.innerHTML = "The pokemon with that name has a Pokedex # of: " + ProcessedResponse.id + " and type(s): "+ ProcessedResponse.typeList + ".";
                     }
                 });
                 //console.log("clicked!");
             }
 
 
-            function readScore(event){
+            function readId(event){
 
                 event.preventDefault();
 
                 let element = document.querySelector("#score");
                 //console.log(element.value);
 
-                fetch("/api/movies/score/" + element.value).then((Response) => {
+                fetch("/id/" + element.value).then((Response) => {
                     return Response.json();
                 }).then((ProcessedResponse) => {
-                    //console.log(ProcessedResponse);
+                    console.log(ProcessedResponse);
                     let reporting = document.querySelector("#reportingArea");
 
                     if(ProcessedResponse.error){
                         reporting.innerHTML = "Sorry, that doesn't exist. We returned: " + ProcessedResponse.name + ".";
                     } else{
-                        reporting.innerHTML = "The movie with that score has the name: "  + ProcessedResponse.name;
+                        reporting.innerHTML = "The pokemon with that id has the name: "  + ProcessedResponse.name + " and type(s): "+ ProcessedResponse.typeList + ".";
                     }
                 });
-                console.log("clicked!");
+                //console.log("clicked!");
                 }
 
 
@@ -76,8 +75,8 @@
                     <button>click Me!</button>
                 </form>
 
-            <h2>Score</h2>
-                <form onsubmit="readScore(event)">
+            <h2>Id</h2>
+                <form onsubmit="readId(event)">
                     <input id = "score" type="text">
                     <button>click Me!</button>
                 </form>
