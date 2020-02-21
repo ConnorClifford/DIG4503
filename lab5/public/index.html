@@ -17,7 +17,7 @@
                     let reporting = document.querySelector("#reportingArea");
 
                     if(ProcessedResponse.error){
-                        reporting.innerHTML = "Sorry, that doesn't exist. We returned: " + ProcessedResponse.name + ".";
+                        reporting.innerHTML = "Sorry, that doesn't exist.";
                     } else{
                         reporting.innerHTML = "The pokemon with that name has a Pokedex # of: " + ProcessedResponse.id + " and type(s): "+ ProcessedResponse.typeList + ".";
                     }
