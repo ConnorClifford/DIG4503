@@ -9,7 +9,7 @@ class NameSearch extends React.Component {
         let element = document.querySelector("#pokeName");
         //console.log(element.value);
 
-        fetch("http://localhost:80/name/" + element.value).then((Response) => {
+        fetch("http://localhost:80/name/" + element.value.toLowerCase()).then((Response) => {
             return Response.json();
         }).then((ProcessedResponse) => {
             console.log(ProcessedResponse);
