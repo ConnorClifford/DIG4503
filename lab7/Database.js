@@ -2,7 +2,7 @@
 //  of the object returned by the require() function
 const MongoClient = require("mongodb").MongoClient;
 // Connect to the system using the username and password as a URL
-const URL = "";
+const URL = "mongodb+srv://connorclifford:FDxZpU3JH12Gxxva@cluster0-tc9sb.mongodb.net/";
 
 // Define a new object, Database
 // 
@@ -60,7 +60,7 @@ class Database {
             // -- (Optional) A callback function
             //
             // By default, it returns a Promise
-            return this.collection.findOne({"title": title});
+            return this.collection.find({"title": title}).limit(100).toArray();
             
         } 
         

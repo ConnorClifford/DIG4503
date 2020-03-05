@@ -1,5 +1,7 @@
 import React from 'react';
+import TitleSearch from './components/TitleSearch';
 import YearSearch from './components/YearSearch';
+
 
 class App extends React.Component {
 
@@ -43,6 +45,7 @@ class App extends React.Component {
   render() {
     return (
       <div>
+        <TitleSearch callback={this.setResultsTable} />
         <YearSearch callback={this.setResultsTable} />
         {this.createResultsTable()}
       </div>
