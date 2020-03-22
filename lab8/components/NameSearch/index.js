@@ -6,11 +6,19 @@ class NameSearch extends React.Component {
         let nameSearch = document.querySelector('#nameSearch').value;
 
         // Look for pokemon based on the id
-        fetch("/api/pokemon/name/" + nameSearch)
+        fetch("http://localhost:3000/api/pokemon/name/" + nameSearch)
         .then((res) => { return res.json() })
         .then((processed) => {
+            console.log(processed);
             // Call the callback function given to the class component
-            this.props.callback(processed);
+            //this.props.callback(processed);
+            let reporting = document.querySelector("#reportingArea");
+
+            if(processed.error){
+                reporting.innerHTML = "Sorry, that doesn't exist. We returned: " + processed.error;
+            } else{
+                reporting.innerHTML = "The pokemon with that name has a Pokedex # of: " + processed.id + " and type(s): "+ processed.typeList + ".";
+            }
         });
 
     }

@@ -4,19 +4,41 @@ import NameSearch from '../components/NameSearch';
 
 class App extends React.Component {
 
+  constructor(props) {
+    super(props);
 
-  displayValue = (processed) => {
+    this.state = {
+      "result": []
+    };
+
+  }
+
+  setDisplayValue = (processed) => {
     return(
-      <h3>{processed}</h3>
-    )
+      this.setState({"result": processed})
+      )
+  }
+
+  createDisplay() {
+
+    return (
+      <div>
+        <h3>Pokemon:</h3>
+        <p>{this.state.result}</p>
+      </div>
+    );
+
   }
 
 
   render() {
     return (
       <div>
-        <IdSearch callback={this.displayValue} />
-        <NameSearch callback={this.displayValue} />
+        <IdSearch />
+        <NameSearch />
+        <h2> Reporting</h2>
+        <div id="reportingArea"></div>
+        {/* {this.createDisplay()} */}
       </div>
     );
   }
