@@ -1,2 +1,2 @@
-# RapidAppLab0
-Lab 0 Submission for the Rapid Application Development Course
+# RapidApp
+Repository for all work related to the Rapid Application UCF course
